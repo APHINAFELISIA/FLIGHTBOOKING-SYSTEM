@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Bookings - AeroSky</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .manage-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+            min-height: calc(100vh - 160px);
+        }
+
+        .manage-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .manage-header h1 {
+            color: #1e293b;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .manage-header p {
+            color: #64748b;
+        }
+
+        .booking-list {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .no-bookings {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: white;
+            border-radius: 12px;
+            border: 1px dashed #cbd5e1;
+        }
+
+        .no-bookings i {
+            font-size: 3rem;
+            color: #94a3b8;
+            margin-bottom: 1rem;
+        }
+
+        .no-bookings h3 {
+            color: #334155;
+            margin-bottom: 0.5rem;
+        }
+
+        .no-bookings p {
+            color: #64748b;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-browse {
+            display: inline-block;
+            background: #10b981;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.3s ease;
+        }
+
+        .btn-browse:hover {
+            background: #059669;
+        }
+
+        .booking-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-left: 4px solid #10b981;
+        }
+
+        .booking-info {
+            display: flex;
+            gap: 2rem;
+            flex: 1;
+        }
+
+        .booking-id-badge {
+            background: #f1f5f9;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            color: #64748b;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .flight-route-manage {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .time-location {
+            text-align: center;
+        }
+
+        .time-location h3 {
+            font-size: 1.2rem;
+            color: #1e293b;
+            margin-bottom: 0.25rem;
+        }
+
+        .time-location p {
+            color: #64748b;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .route-line {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #94a3b8;
+            padding: 0 1rem;
+            border-bottom: 2px dashed #cbd5e1;
+            position: relative;
+            min-width: 100px;
+        }
+
+        .route-line i {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            color: #10b981;
+            background: white;
+            padding: 0 0.5rem;
+        }
+
+        .booking-status {
+            text-align: right;
+        }
+
+        .status-badge {
+            background: #dcfce7;
+            color: #166534;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
+        .airline-text {
+            color: #475569;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .booking-card {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1.5rem;
+            }
+
+            .booking-status {
+                text-align: left;
+                width: 100%;
+                border-top: 1px solid #e2e8f0;
+                padding-top: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="logo">
+                <i class="fa-solid fa-plane-up"></i> AeroSky
+            </a>
+            <div class="nav-links">
+                <a href="/">Flights</a>
+                <a href="#">Hotels</a>
+                <a href="#">Car Rentals</a>
+                <a href="/manage.html" class="active">Manage Booking</a>
+            </div>
+            <div class="nav-actions">
+                <div id="auth-actions" class="hidden">
+                    <div class="user-profile">
+                        <div class="avatar"><i class="fa-solid fa-user"></i></div>
+                        <span id="userNameDisplay">User</span>
+                    </div>
+                    <button class="btn-text" id="logoutBtn">Logout</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content App -->
+    <main class="manage-container">
+        <div class="manage-header">
+            <h1>My Bookings</h1>
+            <p>View and manage all your upcoming and past flights.</p>
+        </div>
+
+        <div id="loadingIndicator" style="text-align: center; padding: 3rem;">
+            <i class="fa-solid fa-spinner fa-spin fa-2x" style="color: #10b981;"></i>
+            <p style="margin-top: 1rem; color: #64748b;">Loading your flights...</p>
+        </div>
+
+        <div id="bookingList" class="booking-list hidden">
+            <!-- Bookings injected here -->
+        </div>
+
+        <div id="noBookings" class="no-bookings hidden">
+            <i class="fa-solid fa-ticket"></i>
+            <h3>No Bookings Found</h3>
+            <p>You haven't booked any flights with AeroSky yet.</p>
+            <a href="/" class="btn-browse">Search Flights</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 AeroSky Airlines Management System. All rights reserved.</p>
+    </footer>
+
+    <!-- Template -->
+    <template id="bookingTemplate">
+        <div class="booking-card">
+            <div class="booking-info">
+                <div>
+                    <span class="booking-id-badge"></span>
+                    <div class="airline-text"></div>
+                </div>
+                <div class="flight-route-manage">
+                    <div class="time-location">
+                        <h3 class="dep-time"></h3>
+                        <p class="dep-city"></p>
+                    </div>
+                    <div class="route-line">
+                        <i class="fa-solid fa-plane"></i>
+                    </div>
+                    <div class="time-location">
+                        <h3 class="arr-time"></h3>
+                        <p class="arr-city"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="booking-status">
+                <span class="status-badge"><i class="fa-solid fa-check"></i> Confirmed</span>
+                <h3 class="price-val" style="color: #1e293b; margin-top: 0.5rem;"></h3>
+            </div>
+        </div>
+    </template>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const authActions = document.getElementById('auth-actions');
+            const userNameDisplay = document.getElementById('userNameDisplay');
+            const logoutBtn = document.getElementById('logoutBtn');
+            const bookingList = document.getElementById('bookingList');
+            const noBookings = document.getElementById('noBookings');
+            const loadingIndicator = document.getElementById('loadingIndicator');
+            const template = document.getElementById('bookingTemplate');
+
+            // Authentication Check
+            const storedUserStr = localStorage.getItem('currentUser');
+            let user = null;
+            if (storedUserStr) {
+                try {
+                    user = JSON.parse(storedUserStr);
+                    userNameDisplay.textContent = user.name;
+                    authActions.classList.remove('hidden');
+                } catch (e) {
+                    localStorage.removeItem('currentUser');
+                }
+            }
+
+            if (!user) {
+                // If not logged in, redirect to login page immediately
+                window.location.href = '/login.html';
+                return;
+            }
+
+            // Logout Logic
+            logoutBtn.addEventListener('click', () => {
+                localStorage.removeItem('currentUser');
+                window.location.href = '/login.html';
+            });
+
+            // Fetch Bookings
+            try {
+                const response = await fetch(`/api/bookings?user_id=${user.id}`);
+                const data = await response.json();
+
+                loadingIndicator.classList.add('hidden');
+
+                if (response.ok && Array.isArray(data) && data.length > 0) {
+                    bookingList.classList.remove('hidden');
+                    data.forEach(booking => {
+                        const clone = template.content.cloneNode(true);
+
+                        clone.querySelector('.booking-id-badge').textContent = `Booking #${booking.booking_id.toString().padStart(5, '0')}`;
+                        clone.querySelector('.airline-text').textContent = `${booking.airline_name} (${booking.airline})`;
+
+                        clone.querySelector('.dep-time').textContent = booking.departure_time;
+                        clone.querySelector('.dep-city').textContent = booking.origin;
+
+                        clone.querySelector('.arr-time').textContent = booking.arrival_time;
+                        clone.querySelector('.arr-city').textContent = booking.destination;
+
+                        clone.querySelector('.price-val').textContent = `$${booking.price}`;
+
+                        bookingList.appendChild(clone);
+                    });
+                } else {
+                    // No bookings or error format
+                    noBookings.classList.remove('hidden');
+                }
+            } catch (err) {
+                console.error("Failed to fetch bookings:", err);
+                loadingIndicator.classList.add('hidden');
+                noBookings.classList.remove('hidden');
+                noBookings.querySelector('h3').textContent = 'Error Loading Bookings';
+                noBookings.querySelector('p').textContent = 'Please try again later or contact support.';
+            }
+        });
+    </script>
+</body>
+
+</html>

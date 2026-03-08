@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AeroSky - Premium Flight Booking</title>
+    <meta name="description"
+        content="Book cheap flights with AeroSky. Find the best deals on airline tickets to destinations worldwide.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fa-solid fa-plane-up"></i> AeroSky
+            </a>
+            <div class="nav-links">
+                <a href="#" class="active">Flights</a>
+                <a href="#">Hotels</a>
+                <a href="#">Car Rentals</a>
+                <a href="/manage.html">Manage Booking</a>
+            </div>
+            <div class="nav-actions">
+                <div id="unauth-actions">
+                    <a href="/login.html" class="btn-text" id="loginBtn"
+                        style="text-decoration: none; display: inline-block;">Log In</a>
+                    <a href="/signup.html" class="btn-primary" id="signupBtn"
+                        style="text-decoration: none; display: inline-block;">Sign Up</a>
+                </div>
+                <div id="auth-actions" class="hidden">
+                    <div class="user-profile">
+                        <div class="avatar"><i class="fa-solid fa-user"></i></div>
+                        <span id="userNameDisplay">User</span>
+                    </div>
+                    <button class="btn-text" id="logoutBtn">Logout</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <!-- Optional: Beautiful background image or gradient via CSS -->
+    </header>
+
+    <!-- Main Content App -->
+    <main class="app-container">
+
+        <div class="hero-content">
+            <div class="hero-badge">Discover The World</div>
+            <h1 class="hero-title">Where would you like to go next?</h1>
+            <p class="hero-subtitle">Find the best prices on flights, hotels, and rentals globally.</p>
+        </div>
+
+        <!-- Glassmorphic Search Form -->
+        <section class="search-widget glass">
+
+            <div class="search-tabs">
+                <button class="tab active"><i class="fa-solid fa-plane"></i> Flight</button>
+                <button class="tab"><i class="fa-solid fa-bed"></i> Hotel</button>
+                <button class="tab"><i class="fa-solid fa-car"></i> Car</button>
+            </div>
+
+            <form id="flightSearchForm" class="search-form">
+
+                <div class="search-controls">
+                    <div class="radio-group">
+                        <label><input type="radio" name="trip" value="round" checked> Round Trip</label>
+                        <label><input type="radio" name="trip" value="one"> One Way</label>
+                        <label><input type="radio" name="trip" value="multi"> Multi-City</label>
+                    </div>
+
+                    <div class="dropdowns">
+                        <select class="custom-select">
+                            <option>1 Passenger</option>
+                            <option>2 Passengers</option>
+                            <option>3+ Passengers</option>
+                        </select>
+                        <select class="custom-select">
+                            <option>Economy</option>
+                            <option>Premium Economy</option>
+                            <option>Business Class</option>
+                            <option>First Class</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="search-inputs">
+                    <div class="input-group">
+                        <label for="from">From</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <input type="text" id="from" placeholder="City or Airport (e.g., JFK)" required>
+                        </div>
+                    </div>
+
+                    <button type="button" class="swap-btn" id="swapBtn" aria-label="Swap origins">
+                        <i class="fa-solid fa-right-left"></i>
+                    </button>
+
+                    <div class="input-group">
+                        <label for="to">To</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-location-crosshairs"></i>
+                            <input type="text" id="to" placeholder="City or Airport (e.g., LHR)" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="depart">Depart</label>
+                        <div class="input-wrapper">
+                            <i class="fa-regular fa-calendar"></i>
+                            <input type="date" id="depart" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group" id="returnGroup">
+                        <label for="return">Return</label>
+                        <div class="input-wrapper">
+                            <i class="fa-regular fa-calendar-check"></i>
+                            <input type="date" id="return">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn-search">
+                        Search Flights <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Loading State (Hidden by default) -->
+        <div id="loadingIndicator" class="loading-state hidden">
+            <div class="spinner"></div>
+            <p>Searching for the best flights...</p>
+        </div>
+
+        <!-- Results Section (Hidden by default) -->
+        <section id="resultsSection" class="results-section hidden">
+            <div class="results-header">
+                <h2>Top Flight Deals</h2>
+                <div class="results-filters">
+                    <span class="results-count">Showing 3 results</span>
+                    <select class="custom-select small">
+                        <option>Sort by: Recommended</option>
+                        <option>Sort by: Cheapest</option>
+                        <option>Sort by: Fastest</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="flightResultsList" class="flight-list">
+                <!-- Flight cards will be injected here via JS -->
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 AeroSky Airlines Management System. All rights reserved.</p>
+    </footer>
+
+    <!-- Templates for injection -->
+    <template id="flightCardTemplate">
+        <div class="flight-card slide-up">
+            <div class="flight-card-main">
+                <div class="airline-info">
+                    <div class="airline-logo"></div>
+                    <span class="airline-name"></span>
+                </div>
+
+                <div class="flight-route">
+                    <div class="time-location">
+                        <h3 class="time dep-time"></h3>
+                        <p class="city dep-city"></p>
+                    </div>
+
+                    <div class="duration-line">
+                        <span class="duration-text"></span>
+                        <div class="line">
+                            <i class="fa-solid fa-plane"></i>
+                        </div>
+                        <span class="stops">Non-stop</span>
+                    </div>
+
+                    <div class="time-location right">
+                        <h3 class="time arr-time"></h3>
+                        <p class="city arr-city"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flight-card-action">
+                <div class="price-info">
+                    <span class="price-label">Price per passenger</span>
+                    <h2 class="price-val"></h2>
+                </div>
+                <button class="btn-book">Select</button>
+            </div>
+        </div>
+    </template>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

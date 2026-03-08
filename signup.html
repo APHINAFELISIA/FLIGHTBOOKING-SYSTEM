@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - AeroSky</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            margin: 0;
+            padding: 1rem;
+        }
+
+        .auth-container {
+            width: 100%;
+            max-width: 450px;
+            padding: 2.5rem;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        .auth-logo {
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            text-decoration: none;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #10b981;
+        }
+
+        .auth-header {
+            margin-bottom: 2rem;
+        }
+
+        .auth-header h2 {
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+            color: #1e293b;
+            font-size: 1.5rem;
+        }
+
+        .auth-header p {
+            color: #64748b;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .input-group {
+            margin-bottom: 1.2rem;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #475569;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 1rem;
+            color: #94a3b8;
+        }
+
+        .input-wrapper input {
+            width: 100%;
+            padding: 0.8rem 1rem 0.8rem 2.5rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .input-wrapper input:focus {
+            outline: none;
+            border-color: #10b981;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+        }
+
+        .btn-auth {
+            width: 100%;
+            padding: 0.9rem;
+            background: #10b981;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .btn-auth:hover {
+            background: #059669;
+        }
+
+        .auth-error {
+            margin-top: 1rem;
+            padding: 0.75rem;
+            background: #fef2f2;
+            color: #ef4444;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .auth-error.hidden {
+            display: none;
+        }
+
+        .auth-footer {
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        .auth-footer a {
+            color: #10b981;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .auth-footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="auth-container">
+        <a href="/" class="auth-logo">
+            <i class="fa-solid fa-plane-up"></i> AeroSky
+        </a>
+
+        <div class="auth-header">
+            <h2>Create Account</h2>
+            <p>Join AeroSky to book flights easily and get exclusive deals securely.</p>
+        </div>
+
+        <form id="signupFormStandalone">
+            <div class="input-group">
+                <label for="name">Full Name</label>
+                <div class="input-wrapper">
+                    <i class="fa-regular fa-user"></i>
+                    <input type="text" id="name" placeholder="John Doe" required>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="email">Email Address</label>
+                <div class="input-wrapper">
+                    <i class="fa-regular fa-envelope"></i>
+                    <input type="email" id="email" placeholder="you@example.com" required>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="password">Password</label>
+                <div class="input-wrapper">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" id="password" placeholder="••••••••" required>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-auth" id="submitBtn">
+                Sign Up
+            </button>
+
+            <div id="signupError" class="auth-error hidden">
+                <i class="fa-solid fa-circle-exclamation"></i> <span id="signupErrorMsg"></span>
+            </div>
+        </form>
+
+        <div class="auth-footer">
+            <p>Already have an account? <a href="/">Log in</a></p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('signupFormStandalone').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const submitBtn = document.getElementById('submitBtn');
+            const errorDiv = document.getElementById('signupError');
+            const errorMsg = document.getElementById('signupErrorMsg');
+
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Processing...';
+            submitBtn.style.opacity = '0.8';
+            errorDiv.classList.add('hidden');
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                const response = await fetch('/api/auth/signup', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, password })
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    localStorage.setItem('currentUser', JSON.stringify(data));
+                    alert('Signup successful! Redirecting to home page.');
+                    window.location.href = '/';
+                } else {
+                    const errData = await response.json();
+                    errorMsg.textContent = errData.error || 'Failed to sign up';
+                    errorDiv.classList.remove('hidden');
+                    submitBtn.innerHTML = 'Sign Up';
+                    submitBtn.style.opacity = '1';
+                }
+            } catch (err) {
+                console.error(err);
+                errorMsg.textContent = 'Server connection error';
+                errorDiv.classList.remove('hidden');
+                submitBtn.innerHTML = 'Sign Up';
+                submitBtn.style.opacity = '1';
+            }
+        });
+    </script>
+</body>
+
+</html>
