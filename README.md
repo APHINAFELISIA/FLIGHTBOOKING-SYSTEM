@@ -25,3 +25,106 @@ Web Browser (Chrome/Firefox) – Testing the application
 Tables
 Relationships
 SQL queries
+
+# FEATURES
+# 1. Flight Search
+
+The system allows users to search for available flights by entering the departure city, destination city, and travel date. The system retrieves matching flights from the database.
+
+# 2. Flight Information Display
+
+Users can view detailed flight information such as:
+
+Airline name
+
+Departure time
+
+Arrival time
+
+Flight duration
+
+Ticket price
+
+# 3. Passenger Management
+
+The system stores and manages passenger details including:
+
+Passenger name
+
+Email address
+
+Phone number
+
+Passport number
+
+# 4. Booking Management
+
+Users can book flights and the system records the booking details including:
+
+Booking ID
+
+Passenger ID
+
+Flight ID
+
+Booking date
+
+Booking status
+
+# 5. Ticket Generation
+
+After booking a flight, the system generates a ticket containing:
+
+Seat number
+
+Travel class
+
+Ticket price
+
+# 6. Payment Processing
+
+The system records payment details for each booking including:
+
+Payment method
+
+Amount paid
+
+Payment date
+
+Payment status
+
+# 7. Flight Status Tracking
+
+The system stores and displays the status of flights such as:
+
+Scheduled
+
+Delayed
+
+Cancelled
+
+# 8. User Authentication
+
+The system includes a login interface that allows users to access their booking information securely.
+
+# 9. Database Management
+
+The system efficiently manages data using relational database tables such as:
+
+Airports
+
+Airlines
+
+Flights
+
+Passengers
+
+Bookings
+
+Tickets
+
+Payments
+
+# 10. User-Friendly Interface
+
+The application provides a simple and responsive user interface that allows users to easily search, view, and book flights.
